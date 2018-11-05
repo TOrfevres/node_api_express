@@ -1,0 +1,6 @@
+Mon Nov 05 2018::{"name":"UnauthorizedError","message":"No authorization token was found","code":"credentials_required","status":401,"inner":{"message":"No authorization token was found"}}
+Mon Nov 05 2018::{"name":"UnauthorizedError","message":"No authorization token was found","code":"credentials_required","status":401,"inner":{"message":"No authorization token was found"}}
+Mon Nov 05 2018::{"name":"UnauthorizedError","message":"No authorization token was found","code":"credentials_required","status":401,"inner":{"message":"No authorization token was found"}}
+Mon Nov 05 2018::{"name":"UnauthorizedError","message":"jwt malformed","code":"invalid_token","status":401,"inner":{"name":"JsonWebTokenError","message":"jwt malformed"}}
+Mon Nov 05 2018::{"name":"UnauthorizedError","message":"jwt malformed","code":"invalid_token","status":401,"inner":{"name":"JsonWebTokenError","message":"jwt malformed"}}
+Mon Nov 05 2018::{"name":"UnauthorizedError","message":"jwt malformed","code":"invalid_token","status":401,"inner":{"name":"JsonWebTokenError","message":"jwt malformed"}}
