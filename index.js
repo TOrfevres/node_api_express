@@ -2,18 +2,11 @@ let fs = require('fs');
 let config = require('config');
 let express = require('express');
 let bodyParser = require('body-parser');
-// let jwt = require('jsonwebtoken');
+let jwt = require('jsonwebtoken');
 
-// let token = jwt.sign({ app: 'node_api_express', version: '1.0.0' }, config.get('server.secret'));
 let app = express();
 let models = [];
 console.clear();
-
-app.use(bodyParser.json());
-
-app.all('/', (req, res) => {
-    res.send('Available paths: ' + models);
-});
 
 let formatLog = (str) => (new Date()).toDateString() + "::" + str + "\n";
 
@@ -77,9 +70,29 @@ let checkDataConstraints = (model, values) => {
     });
 };
 
-app.use(/* (check JWT here), */ (req, res, next) => {
-    fs.writeFileSync('./logs/request.log', formatLog(req.method + " " + req.originalUrl), { flag: 'a' });
-    next();
+app.use(bodyParser.json());
+
+app.all('/', (req, res) => {
+    let value = req.query.user || 'default_user';
+    let token = jwt.sign({ user: value, version: '1.0.0' }, config.get('server.secret'));
+    res.send({
+        paths: models,
+        token: token
+    });
+});
+
+app.use(
+    (req, res, next) => {
+        try {
+            jwt.verify(req.headers.authorization, config.get('server.secret'));
+            next();
+        } catch (error) {
+            next(error)
+        }
+    },
+    (req, res, next) => {
+        fs.writeFileSync('./logs/request.log', formatLog(req.method + " " + req.originalUrl), { flag: 'a' });
+        next();
 });
 
 fs.readdir('./models', (err, files) => {
@@ -94,6 +107,10 @@ fs.readdir('./models', (err, files) => {
         // READ
         app.get('/' + m.toLowerCase(), (req, res) => {
             res.send(readData(m));
+        });
+        app.get('/' + m.toLowerCase() + '/:id', (req, res) => {
+            let list = readData(m);
+            res.send(list.filter(e => e.id === req.params.id));
         });
         // CREATE
         app.put('/' + m.toLowerCase(), (req, res, next) => {
@@ -130,7 +147,6 @@ fs.readdir('./models', (err, files) => {
     app.use((err, req, res, next) => {
         if (err) {
             fs.writeFileSync('./logs/error.log', formatLog(JSON.stringify(err)), { flag: 'a' });
-            console.log(jwt.UnauthorizedError);
             res.status(500).send("Your request hasn't been processed. " + err);
         }
         next();

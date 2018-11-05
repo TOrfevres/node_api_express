@@ -4,3 +4,16 @@ Mon Nov 05 2018::{"name":"UnauthorizedError","message":"No authorization token w
 Mon Nov 05 2018::{"name":"UnauthorizedError","message":"jwt malformed","code":"invalid_token","status":401,"inner":{"name":"JsonWebTokenError","message":"jwt malformed"}}
 Mon Nov 05 2018::{"name":"UnauthorizedError","message":"jwt malformed","code":"invalid_token","status":401,"inner":{"name":"JsonWebTokenError","message":"jwt malformed"}}
 Mon Nov 05 2018::{"name":"UnauthorizedError","message":"jwt malformed","code":"invalid_token","status":401,"inner":{"name":"JsonWebTokenError","message":"jwt malformed"}}
+Mon Nov 05 2018::{"ip":"hello","version":"1.0.0","iat":1541438740}
+Mon Nov 05 2018::{"ip":"hello","version":"1.0.0","iat":1541438740}
+Mon Nov 05 2018::{"ip":"hello","version":"1.0.0","iat":1541438740}
+Mon Nov 05 2018::{"ip":"hello","version":"1.0.0","iat":1541438740}
+Mon Nov 05 2018::{"name":"JsonWebTokenError","message":"jwt malformed"}
+Mon Nov 05 2018::{"name":"JsonWebTokenError","message":"jwt must be provided"}
+Mon Nov 05 2018::{"name":"JsonWebTokenError","message":"jwt must be provided"}
+Mon Nov 05 2018::{"name":"JsonWebTokenError","message":"jwt must be provided"}
+Mon Nov 05 2018::{"name":"JsonWebTokenError","message":"jwt must be provided"}
+Mon Nov 05 2018::{"name":"JsonWebTokenError","message":"jwt must be provided"}
+Mon Nov 05 2018::{"name":"JsonWebTokenError","message":"jwt must be provided"}
+Mon Nov 05 2018::{"name":"JsonWebTokenError","message":"jwt must be provided"}
+Mon Nov 05 2018::{"name":"JsonWebTokenError","message":"jwt must be provided"}
