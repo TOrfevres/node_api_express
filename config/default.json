@@ -2,5 +2,9 @@
     "server": {
         "port": 3000,
         "secret": "t0ken!"
+    },
+    "mongodb": {
+        "url": "mongodb://localhost:27017",
+        "db_name": "db"
     }
 }
