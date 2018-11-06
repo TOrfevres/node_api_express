@@ -115,6 +115,7 @@ fs.readdir('./models', (err, files) => {
         app.get('/' + m.toLowerCase(), (req, res) => {
             res.send(readData(m));
         });
+        // / ! \ MAY NOT WORK / ! \
         app.get('/' + m.toLowerCase() + '/:id', (req, res) => {
             let list = readData(m);
             res.send(list.filter(e => e.id === req.params.id));
