@@ -73,12 +73,19 @@ let checkDataConstraints = (model, values) => {
 app.use(bodyParser.json());
 
 app.all('/', (req, res) => {
-    let value = req.query.user || 'default_user';
-    let token = jwt.sign({ user: value, version: '1.0.0' }, config.get('server.secret'));
-    res.send({
-        paths: models,
-        token: token
-    });
+    let value = req.query.user;
+    if (value) {
+        let token = jwt.sign({user: value, version: '1.0.0'}, config.get('server.secret'));
+        res.send({
+            paths: [...models].map(e => [ '/' + e.toLowerCase(), [ 'GET', 'POST', 'PUT', 'DELETE' ]]),
+            token: token
+        });
+    } else {
+        res.send({
+            paths: [...models].map(e => [ '/' + e.toLowerCase(), [ 'GET', 'POST', 'PUT', 'DELETE' ]]),
+            token: 'You must provide a user as GET param.'
+        });
+    }
 });
 
 app.use(
@@ -113,7 +120,7 @@ fs.readdir('./models', (err, files) => {
             res.send(list.filter(e => e.id === req.params.id));
         });
         // CREATE
-        app.put('/' + m.toLowerCase(), (req, res, next) => {
+        app.post('/' + m.toLowerCase(), (req, res, next) => {
             let values = req.body;
             checkDataConstraints(model, values)
                 .then(() => {
@@ -123,7 +130,7 @@ fs.readdir('./models', (err, files) => {
                 .catch((err) => next(err));
         });
         // UPDATE
-        app.post('/' + m.toLowerCase(), (req, res, next) => {
+        app.put('/' + m.toLowerCase(), (req, res, next) => {
             let values = req.body;
             checkDataConstraints(model, values)
                 .then(() => {
